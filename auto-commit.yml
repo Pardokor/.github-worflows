@@ -3,7 +3,7 @@ name: Auto Commit
 on:
   schedule:
     - cron: "*/10 * * * *"  # Exécute toutes les 10 minutes
-  workflow_dispatch:  # Permet d'exécuter le workflow manuellement
+  workflow_dispatch:  # Permet de le lancer manuellement
 
 jobs:
   update-file:
@@ -14,7 +14,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Modifier le fichier
-        run: echo "Mise à jour automatique : $(date)" >> fichier.txt
+        run: |
+          echo "Mise à jour automatique : $(date)" >> fichier.txt
 
       - name: Configurer Git
         run: |
