@@ -1,0 +1,28 @@
+name: Auto Commit
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"  # Exécute toutes les 10 minutes
+  workflow_dispatch:  # Permet de le lancer manuellement
+
+jobs:
+  update-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du dépôt
+        uses: actions/checkout@v3
+
+      - name: Modifier le fichier
+        run: echo "Mise à jour automatique : $(date)" >> fichier.txt
+
+      - name: Configurer Git
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+      - name: Commit et push
+        run: |
+          git add fichier.txt
+          git commit -m "Mise à jour automatique : $(date)"
+          git push
