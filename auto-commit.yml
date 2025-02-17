@@ -13,9 +13,11 @@ jobs:
       - name: Checkout du dépôt
         uses: actions/checkout@v3
 
+      - name: Vérifier ou créer le fichier
+        run: touch fichier.txt
+
       - name: Modifier le fichier
-        run: |
-          echo "Mise à jour automatique : $(date)" >> fichier.txt
+        run: echo "Mise à jour automatique : $(date)" >> fichier.txt
 
       - name: Configurer Git
         run: |
@@ -25,5 +27,4 @@ jobs:
       - name: Commit et push
         run: |
           git add fichier.txt
-          git commit -m "Mise à jour automatique : $(date)"
-          git push
+          git diff --staged --quiet || (git commit -m "Mise à jour automatique : $(date)" && git push)
