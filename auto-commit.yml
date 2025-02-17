@@ -13,8 +13,10 @@ jobs:
       - name: Checkout du dépôt
         uses: actions/checkout@v3
 
-      - name: Modifier le fichier
-        run: echo "Mise à jour automatique : $(date)" >> fichier.txt
+           - name: Modifier le fichier
+             run: |
+          echo "Mise à jour automatique : $(date)" >> fichier.txt
+
 
       - name: Configurer Git
         run: |
